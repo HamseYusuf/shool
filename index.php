@@ -1,6 +1,11 @@
 <html>
     <?php include('base.php');
+          include("header.php");
          include('db.php');
+         session_start();
+         if(!isset($_SESSION['user_id'])) {
+            header("Location: login.php");
+         }
      ?>
      <body>
         <div class="container">
@@ -12,6 +17,7 @@
                     <th>Name</th>
                     <th>Grade</th>
                     <th>Address</th>
+                    <th></th>
                 </thead>
                 <tbody>
              <?php
@@ -26,6 +32,10 @@
                             <td><?php echo $student['name'] ?></td>
                             <td><?php echo $student['grade'] ?></td>
                             <td><?php echo $student['address'] ?></td>
+                            <td>
+                                <a href="update.php?id=<?php echo $student['id'] ?>" class="btn btn-info btn-sm">Update</a>
+                                <a href="delete.php?id=<?php echo $student['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
                         </tr>
                    <?php }?>
                 </tbody>
